@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anya Taylor-Joy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════
+   THEME TOKENS
+═══════════════════════════════════════════════ */
+      :root {
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "Raleway", sans-serif;
+        --gold: #c9a96e;
+        --gold2: #e8c98a;
+        --trans:
+          background 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+          box-shadow 0.4s ease;
+      }
+
+      /* DARK theme (default) */
+      [data-theme="dark"] {
+        --bg: #0a0a0a;
+        --surface: #161616;
+        --surface2: #1e1e1e;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.12);
+        --text: #f2ede8;
+        --text-dim: rgba(242, 237, 232, 0.45);
+        --text-faint: rgba(242, 237, 232, 0.18);
+        --header-bg: rgba(10, 10, 10, 0.96);
+        --img-filter: grayscale(15%) brightness(0.85);
+        --img-hover: grayscale(0%) brightness(1);
+        --overlay-g: rgba(10, 10, 10, 0.78);
+        --slide-grad: rgba(0, 0, 0, 0.82);
+        --slide-img: brightness(0.72);
+        --grain-op: 0.6;
+      }
+
+      /* LIGHT theme */
+      [data-theme="light"] {
+        --bg: #f5f0e8;
+        --surface: #ece5d8;
+        --surface2: #e4dccf;
+        --border: rgba(60, 40, 20, 0.12);
+        --border2: rgba(60, 40, 20, 0.2);
+        --text: #1a1208;
+        --text-dim: rgba(26, 18, 8, 0.55);
+        --text-faint: rgba(26, 18, 8, 0.25);
+        --header-bg: rgba(245, 240, 232, 0.96);
+        --img-filter: grayscale(8%) brightness(0.95);
+        --img-hover: grayscale(0%) brightness(1.04);
+        --overlay-g: rgba(245, 240, 232, 0.78);
+        --slide-grad: rgba(20, 14, 4, 0.75);
+        --slide-img: brightness(0.8);
+        --grain-op: 0.3;
+      }
+
+      /* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-weight: 200;
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition: var(--trans);
+      }
+
+      /* film grain */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9000;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+        opacity: var(--grain-op);
+        transition: opacity 0.4s ease;
+      }
+
+      /* ═══════════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════════ */
+      header {
+        /* position: absolute; */
+        top: 0;
+        width: 100%;
+        z-index: 500;
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0 clamp(18px, 4vw, 60px);
+        border-bottom: 1px solid var(--border);
+        transition: var(--trans);
+      }
+
+      .hd {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0;
+        flex-wrap: wrap;
+      }
+
+      .logo-name {
+        font-family: var(--serif);
+        font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+        font-weight: 400;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        color: var(--text);
+        transition: color 0.4s ease;
+      }
+      .logo-name em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .logo-sub {
+        margin-top: 4px;
+        font-size: 0.55rem;
+        letter-spacing: 0.44em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        transition: color 0.4s ease;
+      }
+
+      /* header right: nav + theme btn */
+      .hd-right {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+
+      nav {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab {
+        position: relative;
+        background: none;
+        border: none;
+        font-family: var(--sans);
+        font-size: 0.6rem;
+        font-weight: 300;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        padding: 10px 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color 0.3s var(--ease);
+      }
+      .tab::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 70%;
+        height: 1px;
+        background: var(--gold);
+        transition: transform 0.35s var(--ease);
+      }
+      .tab:hover {
+        color: var(--text);
+      }
+      .tab.active {
+        color: var(--text);
+      }
+      .tab.active::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+
+      /* THEME TOGGLE BUTTON */
+      .theme-btn {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--surface2);
+        border: 1px solid var(--border2);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.58rem;
+        font-weight: 300;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        padding: 7px 14px;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: var(--trans);
+        margin-left: 8px;
+      }
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .theme-btn .icon {
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+
+      /* ═══════════════════════════════════════════════
+   LABEL BAR
+═══════════════════════════════════════════════ */
+      .label-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: clamp(16px, 3vw, 32px) clamp(18px, 4vw, 60px)
+          clamp(10px, 2vw, 18px);
+        transition: var(--trans);
+      }
+      .lr-rule {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        transition: background 0.4s ease;
+      }
+      .lr-text {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        white-space: nowrap;
+        transition: color 0.4s ease;
+      }
+
+      /* ═══════════════════════════════════════════════
+   GALLERY WRAPPER
+═══════════════════════════════════════════════ */
+      #gallery {
+        padding: 0 clamp(18px, 4vw, 60px) clamp(60px, 8vw, 100px);
+      }
+
+      .view-enter {
+        animation: vIn 0.4s var(--ease) both;
+      }
+      @keyframes vIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ═══════════════════════════════════════════════
+   GRID VIEW
+═══════════════════════════════════════════════ */
+      #grid-view {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 3px;
+      }
+
+      .gc {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--surface);
+        aspect-ratio: 3/4;
+        transition: var(--trans);
+      }
+      .gc img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: var(--img-filter);
+        transition:
+          transform 0.7s var(--ease),
+          filter 0.5s ease;
+      }
+      .gc:hover img {
+        transform: scale(1.09);
+        filter: var(--img-hover);
+      }
+
+      .gc-over {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          var(--overlay-g) 0%,
+          transparent 55%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 18px;
+      }
+      .gc:hover .gc-over {
+        opacity: 1;
+      }
+      .gc-nm {
+        font-family: var(--serif);
+        font-size: 0.95rem;
+        letter-spacing: 0.07em;
+        color: var(--text);
+      }
+
+      .gc:nth-child(1) {
+        animation: gcIn 0.5s 0.04s both;
+      }
+      .gc:nth-child(2) {
+        animation: gcIn 0.5s 0.08s both;
+      }
+      .gc:nth-child(3) {
+        animation: gcIn 0.5s 0.12s both;
+      }
+      .gc:nth-child(4) {
+        animation: gcIn 0.5s 0.16s both;
+      }
+      .gc:nth-child(5) {
+        animation: gcIn 0.5s 0.2s both;
+      }
+      .gc:nth-child(6) {
+        animation: gcIn 0.5s 0.24s both;
+      }
+      .gc:nth-child(7) {
+        animation: gcIn 0.5s 0.28s both;
+      }
+      .gc:nth-child(8) {
+        animation: gcIn 0.5s 0.32s both;
+      }
+      .gc:nth-child(n + 9) {
+        animation: gcIn 0.5s 0.36s both;
+      }
+      @keyframes gcIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* ═══════════════════════════════════════════════
+   LANDSCAPE VIEW  — 90vh full-viewport cards
+═══════════════════════════════════════════════ */
+      #landscape-view {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .ls-card {
+        position: relative;
+        width: 100%;
+        height: 90vh;
+        min-height: 360px;
+        overflow: hidden;
+        cursor: pointer;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        transition: border-color 0.35s ease;
+      }
+      .ls-card:hover {
+        border-color: rgba(201, 169, 110, 0.4);
+      }
+
+      /* Image fills card, object-fit: contain so full photo is always visible */
+      .ls-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        filter: var(--img-filter);
+        transition:
+          filter 0.5s ease,
+          transform 0.6s var(--ease);
+      }
+      .ls-card:hover img {
+        filter: var(--img-hover);
+        transform: scale(1.015);
+      }
+
+      /* subtle dark vignette for name readability */
+      .ls-card-vignette {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 35%),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, transparent 25%);
+      }
+      [data-theme="light"] .ls-card-vignette {
+        background:
+          linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, transparent 35%),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, transparent 25%);
+      }
+
+      /* name label bottom-left */
+      .ls-card-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 34px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .ls-card-name {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 3vw, 2.6rem);
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        color: #f2ede8;
+        line-height: 1;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+        transition: color 0.3s ease;
+      }
+      .ls-card-name em {
+        font-style: italic;
+        color: var(--gold2);
+      }
+
+      /* faint index number bottom-right */
+      .ls-card-num {
+        font-family: var(--serif);
+        font-size: 5rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.06);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /* gold accent left bar */
+      .ls-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--gold);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        z-index: 2;
+      }
+      .ls-card:hover::before {
+        opacity: 0.8;
+      }
+
+      /* ═══════════════════════════════════════════════
+   SLIDESHOW VIEW  (normal mode)
+═══════════════════════════════════════════════ */
+      #slideshow-view {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        min-height: 300px;
+        background: #000;
+        overflow: hidden;
+      }
+
+      /* fullscreen mode — covers everything like YouTube */
+      #slideshow-view.fs-mode {
+        position: fixed;
+        inset: 0;
+        z-index: 800;
+        width: 100vw;
+        height: 100vh;
+        aspect-ratio: unset;
+        border-radius: 0;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        object-fit: contain;
+        transition: opacity 1s ease;
+      }
+      .slide.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        filter: var(--slide-img);
+      }
+      .slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 38%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+      }
+
+      .slide-nm {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: clamp(18px, 4vw, 52px);
+        background: linear-gradient(
+          to top,
+          var(--slide-grad) 0%,
+          transparent 100%
+        );
+      }
+      .slide-nm-txt {
+        font-family: var(--serif);
+        font-size: clamp(1.5rem, 4.5vw, 3.7rem);
+        font-weight: 400;
+        letter-spacing: 0.09em;
+        color: #f2ede8;
+        line-height: 1;
+      }
+      .slide-nm-txt em {
+        font-style: italic;
+        color: var(--gold2);
+      }
+
+      .ss-ctr {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+        color: rgba(242, 237, 232, 0.5);
+        z-index: 10;
+      }
+
+      .ss-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: var(--gold);
+        width: 0%;
+        z-index: 10;
+      }
+
+      .ss-dots {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 7px;
+        align-items: center;
+        z-index: 10;
+      }
+      .ss-dot {
+        height: 4px;
+        width: 4px;
+        background: rgba(242, 237, 232, 0.28);
+        cursor: pointer;
+        transition: all 0.35s ease;
+      }
+      .ss-dot.active {
+        width: 24px;
+        background: var(--gold);
+      }
+
+      /* controls row bottom-right */
+      .ss-ctrl {
+        position: absolute;
+        bottom: 22px;
+        right: 22px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 10;
+      }
+
+      .ss-btn {
+        width: 36px;
+        height: 36px;
+        background: rgba(242, 237, 232, 0.08);
+        border: 1px solid rgba(242, 237, 232, 0.2);
+        color: #f2ede8;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .ss-btn:hover {
+        background: rgba(201, 169, 110, 0.25);
+        border-color: rgba(201, 169, 110, 0.55);
+      }
+
+      .ss-btn.play {
+        width: 44px;
+        height: 44px;
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #0a0a0a;
+        font-size: 1rem;
+      }
+      .ss-btn.play:hover {
+        background: var(--gold2);
+        border-color: var(--gold2);
+      }
+
+      /* fullscreen button — top-right corner inside slideshow */
+      .ss-fs-btn {
+        position: absolute;
+        top: 18px;
+        left: 22px;
+        z-index: 10;
+        width: 34px;
+        height: 34px;
+        background: rgba(242, 237, 232, 0.08);
+        border: 1px solid rgba(242, 237, 232, 0.2);
+        color: #f2ede8;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .ss-fs-btn:hover {
+        background: rgba(201, 169, 110, 0.25);
+        border-color: rgba(201, 169, 110, 0.55);
+      }
+
+      /* hide body scroll when fullscreen slideshow */
+      body.ss-fullscreen {
+        overflow: hidden;
+      }
+
+      /* ═══════════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════════ */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 700;
+        background: rgba(0, 0, 0, 0.93);
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      #lightbox.open {
+        display: flex;
+        animation: lbIn 0.25s ease;
+      }
+      @keyframes lbIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .lb-inner {
+        position: relative;
+        max-width: 700px;
+        width: 100%;
+        animation: lbPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes lbPop {
+        from {
+          transform: scale(0.88);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .lb-inner img {
+        width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        display: block;
+      }
+      .lb-foot {
+        padding: 12px 2px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .lb-nm {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        color: #f2ede8;
+      }
+      .lb-x {
+        position: absolute;
+        top: -13px;
+        right: -13px;
+        width: 30px;
+        height: 30px;
+        background: var(--gold);
+        border: none;
+        color: #0a0a0a;
+        font-size: 0.8rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-x:hover {
+        background: var(--gold2);
+      }
+
+      /* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+      footer {
+        border-top: 1px solid var(--border);
+        text-align: center;
+        padding: 24px 40px;
+        font-size: 0.58rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        transition: var(--trans);
+      }
+      footer a {
+        color: var(--text-faint);
+        text-decoration: none;
+      }
+
+      .loader {
+        padding: 24px 40px;
+        font-size: 2rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        transition: var(--trans);
+        text-align: center;
+      }
+
+      /* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+      @media (max-width: 640px) {
+        #grid-view {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2px;
+        }
+        .ls-card {
+          height: 80vh;
+        }
+        .ls-card-num {
+          display: none;
+        }
+        #slideshow-view:not(.fs-mode) {
+          aspect-ratio: 4/3;
+        }
+        .ss-ctrl {
+          bottom: 10px;
+          right: 10px;
+          gap: 5px;
+        }
+        .ss-fs-btn {
+          top: 10px;
+          left: 10px;
+        }
+      }
+      @media (max-width: 400px) {
+        #grid-view {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════ HEADER ════════ -->
+    <header>
+      <div class="hd">
+        <div>
+          <div class="logo-name"><em>Anya</em> Taylor-Joy</div>
+          <div class="logo-sub">Portrait Gallery</div>
+        </div>
+        <div class="hd-right">
+          <nav id="nav">
+            <button class="tab active" data-view="grid">⊞ &nbsp;Grid</button>
+            <button class="tab" data-view="landscape">
+              ☰ &nbsp;Landscape
+            </button>
+            <button class="tab" data-view="slideshow">▷ &nbsp;Slideshow</button>
+          </nav>
+          <!-- THEME TOGGLE -->
+          <button class="theme-btn" id="theme-btn" title="Toggle theme">
+            <span class="icon" id="theme-icon">☀</span>
+            <span id="theme-label">Light</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ════════ LABEL BAR ════════ -->
+    <div class="label-bar">
+      <div class="lr-rule"></div>
+      <div class="lr-text" id="vl">Grid Gallery</div>
+      <div class="lr-rule"></div>
+    </div>
+
+    <!-- ════════ GALLERY ════════ -->
+    <main id="gallery">
+      <!-- GRID -->
+      <div id="grid-view"></div>
+
+      <!-- LANDSCAPE -->
+      <div id="landscape-view" style="display: none"></div>
+
+      <!-- SLIDESHOW -->
+      <div id="slideshow-view" style="display: none">
+        <!-- fullscreen toggle button (top-left inside player) -->
+        <button class="ss-fs-btn" id="ss-fs-btn" title="Toggle fullscreen">
+          ⛶
+        </button>
+
+        <div id="ss-slides"></div>
+        <div class="ss-ctr">
+          <span id="ss-c">1</span> / <span id="ss-t">1</span>
+        </div>
+        <div class="ss-bar" id="ss-bar"></div>
+        <div class="ss-dots" id="ss-dots"></div>
+        <div class="ss-ctrl">
+          <button class="ss-btn" id="ss-prev">&#8592;</button>
+          <button class="ss-btn play" id="ss-play">&#9654;</button>
+          <button class="ss-btn" id="ss-next">&#8594;</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ════════ LIGHTBOX ════════ -->
+    <div id="lightbox">
+      <div class="lb-inner">
+        <button class="lb-x" id="lb-x">✕</button>
+        <img id="lb-img" src="" alt="" />
+        <div class="lb-foot"><div class="lb-nm" id="lb-nm"></div></div>
+      </div>
+    </div>
+    <div class="loader">Loading...</div>
+    <footer>
+      Anya Taylor-Joy &nbsp;·&nbsp; Portrait Archive &nbsp;·&nbsp;
+      <a href="./upload.html">Upload</a>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════
+     ★  ADD A NEW PHOTO:  { url:"...", name:"Anya Taylor-Joy" }
+════════════════════════════════════════════════════════ -->
+    <script src="./upload.js"></script>
+    <script>
+        let images = [];
+      const loader = document.querySelector(".loader");
+      async function loadImages() {
+        try {
+          loader.style.display = "block";
+          const response = await fetch("http://localhost:5000/images");
+          images = await response.json();
+          loader.style.display = "none";
+          buildGallery(); // call your existing logic
+        } catch (err) {
+          console.error("Failed to load images", err);
+          loader.style.display = "none";
+        }
+      }
+
+      loadImages();
+      // [ {}, {}, {} ]
+      //  name: result.name,
+      //           originalUrl: result.url,
+      //           thumbnailUrl: thumbnailUrl,
+      //           fileId: result.fileId,
+      //           size: result.size,
+      //           width: result.width,
+      //           height: result.height
+      function buildGallery() {
+        /* ───────── DOM REFS ───────── */
+        const gEl = document.getElementById("grid-view");
+        const lEl = document.getElementById("landscape-view");
+        const sEl = document.getElementById("ss-slides");
+        const dEl = document.getElementById("ss-dots");
+
+        /* ───────── BUILD GRID + LANDSCAPE ONLY (Lightweight) ───────── */
+        images.forEach((img, i) => {
+          // GRID
+          const gc = document.createElement("div");
+          gc.className = "gc";
+          console.log(img.thumbnailUrl);
+          gc.innerHTML = `
+      <img src="${img.thumbnailUrl}" alt="${img.name}" loading="lazy"/>
+      <div class="gc-over">
+        <div class="gc-nm">${img.name}</div>
+      </div>`;
+          gc.addEventListener("click", () => openLB(img));
+          gEl.appendChild(gc);
+
+          // LANDSCAPE
+          const ls = document.createElement("div");
+          ls.className = "ls-card";
+          ls.innerHTML = `
+      <img src="${img.originalUrl}" alt="${img.name}" loading="lazy"/>
+      <div class="ls-card-vignette"></div>
+      <div class="ls-card-label">
+        <div class="ls-card-name"><em>Anya</em> Taylor-Joy</div>
+        <div class="ls-card-num">${String(i + 1).padStart(2, "0")}</div>
+      </div>`;
+          ls.addEventListener("click", () => openLB(img));
+          lEl.appendChild(ls);
+        });
+
+        /* ───────── BUILD SLIDES (Lazy Source Only) ───────── */
+        images.forEach((img, i) => {
+          const sl = document.createElement("div");
+          sl.className = "slide" + (i === 0 ? " active" : "");
+          sl.innerHTML = `
+      <img data-src="${img.originalUrl}" alt="${img.name}" loading="lazy"/>
+      <div class="slide-nm">
+        <div class="slide-nm-txt"><em>Anya</em> Taylor-Joy</div>
+      </div>`;
+          sEl.appendChild(sl);
+
+          const dot = document.createElement("div");
+          dot.className = "ss-dot" + (i === 0 ? " active" : "");
+          dot.addEventListener("click", () => goTo(i));
+          dEl.appendChild(dot);
+        });
+
+        document.getElementById("ss-t").textContent = images.length;
+
+        /* ───────── THEME TOGGLE ───────── */
+        const html = document.documentElement;
+        const themeBtn = document.getElementById("theme-btn");
+        const themeIcon = document.getElementById("theme-icon");
+        const themeLabel = document.getElementById("theme-label");
+
+        let isDark = true;
+
+        themeBtn.addEventListener("click", () => {
+          isDark = !isDark;
+          html.setAttribute("data-theme", isDark ? "dark" : "light");
+          themeIcon.textContent = isDark ? "☀" : "☾";
+          themeLabel.textContent = isDark ? "Light" : "Dark";
+        });
+
+        /* ───────── VIEW SWITCHER ───────── */
+        const vlabels = {
+          grid: "Grid Gallery",
+          landscape: "Landscape",
+          slideshow: "Slideshow",
+        };
+
+        document.getElementById("nav").addEventListener("click", (e) => {
+          const btn = e.target.closest(".tab");
+          if (!btn) return;
+          const v = btn.dataset.view;
+
+          document
+            .querySelectorAll(".tab")
+            .forEach((t) => t.classList.remove("active"));
+          btn.classList.add("active");
+
+          ["grid", "landscape", "slideshow"].forEach((n) => {
+            const el = document.getElementById(n + "-view");
+            el.style.display = "none";
+            el.classList.remove("view-enter");
+          });
+
+          const el = document.getElementById(v + "-view");
+          el.style.display =
+            v === "grid" ? "grid" : v === "landscape" ? "flex" : "block";
+
+          requestAnimationFrame(() => el.classList.add("view-enter"));
+          document.getElementById("vl").textContent = vlabels[v];
+
+          if (v === "slideshow") {
+            loadSlideImage(0);
+            startPlay();
+          } else {
+            stopPlay();
+            exitFS();
+          }
+        });
+
+        /* ───────── SLIDESHOW LOGIC ───────── */
+        const INTV = 3800;
+        let cur = 0,
+          playing = false,
+          tmr = null;
+
+        function loadSlideImage(index) {
+          const slide = document.querySelectorAll(".slide")[index];
+          const img = slide.querySelector("img");
+          if (!img.src) {
+            img.src = img.dataset.src;
+          }
+        }
+
+        function goTo(n) {
+          document.querySelectorAll(".slide")[cur].classList.remove("active");
+          document.querySelectorAll(".ss-dot")[cur].classList.remove("active");
+
+          cur = (n + images.length) % images.length;
+
+          loadSlideImage(cur);
+
+          document.querySelectorAll(".slide")[cur].classList.add("active");
+          document.querySelectorAll(".ss-dot")[cur].classList.add("active");
+
+          document.getElementById("ss-c").textContent = cur + 1;
+          animBar();
+        }
+
+        function animBar() {
+          const b = document.getElementById("ss-bar");
+          b.style.transition = "none";
+          b.style.width = "0%";
+          requestAnimationFrame(() => {
+            b.style.transition = `width ${INTV}ms linear`;
+            b.style.width = "100%";
+          });
+        }
+
+        function startPlay() {
+          if (playing) return;
+          playing = true;
+          document.getElementById("ss-play").innerHTML = "&#9646;&#9646;";
+          animBar();
+          tmr = setInterval(() => goTo(cur + 1), INTV);
+        }
+
+        function stopPlay() {
+          playing = false;
+          clearInterval(tmr);
+          const p = document.getElementById("ss-play");
+          if (p) p.innerHTML = "&#9654;";
+          const b = document.getElementById("ss-bar");
+          if (b) {
+            b.style.transition = "none";
+            b.style.width = "0%";
+          }
+        }
+
+        /* Controls */
+        document.getElementById("ss-prev").addEventListener("click", () => {
+          stopPlay();
+          goTo(cur - 1);
+        });
+        document.getElementById("ss-next").addEventListener("click", () => {
+          stopPlay();
+          goTo(cur + 1);
+        });
+        document
+          .getElementById("ss-play")
+          .addEventListener("click", () =>
+            playing ? stopPlay() : startPlay(),
+          );
+
+        /* ───────── FULLSCREEN ───────── */
+        const ssView = document.getElementById("slideshow-view");
+        const fsBtnEl = document.getElementById("ss-fs-btn");
+        let fsActive = false;
+
+        function enterFS() {
+          fsActive = true;
+          ssView.classList.add("fs-mode");
+          document.body.classList.add("ss-fullscreen");
+          fsBtnEl.innerHTML = "&#x26F6;";
+        }
+
+        function exitFS() {
+          fsActive = false;
+          ssView.classList.remove("fs-mode");
+          document.body.classList.remove("ss-fullscreen");
+          fsBtnEl.innerHTML = "⛶";
+        }
+
+        fsBtnEl.addEventListener("click", () =>
+          fsActive ? exitFS() : enterFS(),
+        );
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            if (fsActive) {
+              exitFS();
+              return;
+            }
+            closeLB();
+          }
+        });
+
+        /* ───────── LIGHTBOX ───────── */
+        function openLB(img) {
+          document.getElementById("lb-img").src = img.originalUrl;
+          document.getElementById("lb-img").alt = img.name;
+          document.getElementById("lb-nm").textContent = img.name;
+          document.getElementById("lightbox").classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeLB() {
+          document.getElementById("lightbox").classList.remove("open");
+          if (!fsActive) document.body.style.overflow = "";
+        }
+
+        document.getElementById("lightbox").addEventListener("click", (e) => {
+          if (e.target.id === "lightbox") closeLB();
+        });
+        document.getElementById("lb-x").addEventListener("click", closeLB);
+      }
+    </script>
+  </body>
+</html>

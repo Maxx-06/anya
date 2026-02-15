@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload — Anya Taylor-Joy Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════
+   THEME TOKENS  (identical to gallery)
+═══════════════════════════════════════════════ */
+      :root {
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "Raleway", sans-serif;
+        --gold: #c9a96e;
+        --gold2: #e8c98a;
+        --trans:
+          background 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+          box-shadow 0.4s ease;
+      }
+
+      [data-theme="dark"] {
+        --bg: #0a0a0a;
+        --surface: #161616;
+        --surface2: #1e1e1e;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.12);
+        --text: #f2ede8;
+        --text-dim: rgba(242, 237, 232, 0.45);
+        --text-faint: rgba(242, 237, 232, 0.18);
+        --header-bg: rgba(10, 10, 10, 0.96);
+        --grain-op: 0.6;
+      }
+
+      [data-theme="light"] {
+        --bg: #f5f0e8;
+        --surface: #ece5d8;
+        --surface2: #e4dccf;
+        --border: rgba(60, 40, 20, 0.12);
+        --border2: rgba(60, 40, 20, 0.2);
+        --text: #1a1208;
+        --text-dim: rgba(26, 18, 8, 0.55);
+        --text-faint: rgba(26, 18, 8, 0.25);
+        --header-bg: rgba(245, 240, 232, 0.96);
+        --grain-op: 0.3;
+      }
+
+      /* ═══════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-weight: 200;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        transition: var(--trans);
+      }
+
+      /* film grain */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9000;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+        opacity: var(--grain-op);
+        transition: opacity 0.4s ease;
+      }
+
+      /* ═══════════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════════ */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(18px, 4vw, 60px);
+        transition: var(--trans);
+      }
+
+      .hd {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0;
+        flex-wrap: wrap;
+      }
+
+      .logo-name {
+        font-family: var(--serif);
+        font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+        font-weight: 400;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        color: var(--text);
+        transition: color 0.4s ease;
+      }
+      .logo-name em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      .logo-sub {
+        margin-top: 4px;
+        font-size: 0.55rem;
+        letter-spacing: 0.44em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        transition: color 0.4s ease;
+      }
+
+      /* THEME TOGGLE */
+      .theme-btn {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--surface2);
+        border: 1px solid var(--border2);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.58rem;
+        font-weight: 300;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        padding: 7px 14px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: var(--trans);
+      }
+      .theme-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .theme-btn .icon {
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+
+      /* ═══════════════════════════════════════════════
+   LABEL BAR
+═══════════════════════════════════════════════ */
+      .label-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: clamp(16px, 3vw, 32px) clamp(18px, 4vw, 60px)
+          clamp(10px, 2vw, 18px);
+        transition: var(--trans);
+      }
+      .lr-rule {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        transition: background 0.4s ease;
+      }
+      .lr-text {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        white-space: nowrap;
+        transition: color 0.4s ease;
+      }
+
+      /* ═══════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════ */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(30px, 6vw, 80px) clamp(18px, 4vw, 60px);
+      }
+
+      /* ═══════════════════════════════════════════════
+   UPLOAD CARD
+═══════════════════════════════════════════════ */
+      .upload-card {
+        width: 100%;
+        max-width: 520px;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        padding: clamp(32px, 5vw, 56px) clamp(28px, 4vw, 52px);
+        transition: var(--trans);
+        position: relative;
+      }
+
+      /* gold top-edge accent */
+      .upload-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        opacity: 0.6;
+      }
+
+      .card-title {
+        font-family: var(--serif);
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        color: var(--text);
+        margin-bottom: 6px;
+        transition: color 0.4s ease;
+      }
+      .card-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      .card-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 36px;
+        transition: color 0.4s ease;
+      }
+
+      /* ── FILE DROP ZONE ── */
+      .drop-zone {
+        position: relative;
+        border: 1px dashed var(--border2);
+        padding: 36px 24px;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.3s ease,
+          background 0.3s ease;
+        margin-bottom: 24px;
+      }
+      .drop-zone:hover,
+      .drop-zone.drag-over {
+        border-color: var(--gold);
+        background: rgba(201, 169, 110, 0.05);
+      }
+
+      /* hide the real file input but keep it functional */
+      .drop-zone input[type="file"] {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .drop-icon {
+        font-size: 2.2rem;
+        line-height: 1;
+        margin-bottom: 12px;
+        color: var(--gold);
+        display: block;
+      }
+
+      .drop-label {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        color: var(--text);
+        margin-bottom: 6px;
+        transition: color 0.4s ease;
+      }
+
+      .drop-hint {
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        transition: color 0.4s ease;
+      }
+
+      /* ── FILE LIST ── */
+      #file-list {
+        list-style: none;
+        margin-bottom: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      #file-list:empty {
+        display: none;
+      }
+
+      .file-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 14px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        color: var(--text-dim);
+        transition: var(--trans);
+        animation: fileIn 0.25s var(--ease) both;
+      }
+      @keyframes fileIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .file-item .fi-name {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: var(--sans);
+        font-weight: 300;
+      }
+      .file-item .fi-size {
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        color: var(--text-faint);
+        flex-shrink: 0;
+      }
+      .file-item .fi-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        flex-shrink: 0;
+        opacity: 0.7;
+      }
+
+      /* ── SUBMIT BUTTON ── */
+      .upload-btn {
+        width: 100%;
+        padding: 14px 24px;
+        background: var(--gold);
+        border: none;
+        color: #0a0a0a;
+        font-family: var(--sans);
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          background 0.25s ease,
+          transform 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .upload-btn:hover {
+        background: var(--gold2);
+        transform: translateY(-1px);
+      }
+      .upload-btn:active {
+        transform: translateY(0);
+      }
+      .upload-btn:disabled {
+        background: var(--surface2);
+        color: var(--text-faint);
+        cursor: not-allowed;
+        transform: none;
+      }
+      .upload-btn .btn-arrow {
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      /* ── COUNT BADGE ── */
+      .count-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        background: rgba(10, 10, 10, 0.3);
+        font-size: 0.6rem;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        border-radius: 0;
+        transition: opacity 0.3s ease;
+      }
+      .count-badge.hidden {
+        opacity: 0;
+      }
+
+      /* ── DIVIDER ── */
+      .card-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+        transition: background 0.4s ease;
+      }
+
+      /* ── NOTE LINE ── */
+      .card-note {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        text-align: center;
+        letter-spacing: 0.05em;
+        transition: color 0.4s ease;
+      }
+
+      /* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+      footer {
+        border-top: 1px solid var(--border);
+        text-align: center;
+        padding: 22px 40px;
+        font-size: 0.58rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        transition: var(--trans);
+      }
+
+      /* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+      @media (max-width: 480px) {
+        .upload-card {
+          padding: 28px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════ HEADER ════════ -->
+    <header>
+      <div class="hd">
+        <div>
+          <div class="logo-name"><em>Anya</em> Taylor-Joy</div>
+          <div class="logo-sub">Portrait Gallery</div>
+        </div>
+        <button class="theme-btn" id="theme-btn" title="Toggle theme">
+          <span class="icon" id="theme-icon">☀</span>
+          <span id="theme-label">Light</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ════════ LABEL BAR ════════ -->
+    <div class="label-bar">
+      <div class="lr-rule"></div>
+      <div class="lr-text">Upload Images</div>
+      <div class="lr-rule"></div>
+    </div>
+
+    <!-- ════════ MAIN ════════ -->
+    <main>
+      <div class="upload-card">
+        <div class="card-title">Add <em>Portraits</em></div>
+        <div class="card-sub">Select or drag images to upload</div>
+
+        <form id="uploadForm">
+          <!-- DROP ZONE wraps the file input -->
+          <div class="drop-zone" id="drop-zone">
+            <input
+              type="file"
+              id="images"
+              name="images"
+              multiple
+              accept="image/*"
+              required
+            />
+            <span class="drop-icon">⬆</span>
+            <div class="drop-label">Drop images here</div>
+            <div class="drop-hint">
+              or click to browse &nbsp;·&nbsp; jpg, png, webp
+            </div>
+          </div>
+
+          <!-- FILE LIST -->
+          <ul id="file-list"></ul>
+
+          <!-- DIVIDER (shown only when files selected) -->
+          <div
+            class="card-divider"
+            id="card-divider"
+            style="display: none"
+          ></div>
+
+          <!-- SUBMIT -->
+          <button type="submit" class="upload-btn" id="upload-btn" disabled>
+            <span>Upload</span>
+            <span class="count-badge hidden" id="count-badge">0</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </form>
+
+        <div class="card-divider"></div>
+        <div class="card-note">Images are added to the portrait archive</div>
+      </div>
+    </main>
+
+    <footer>Anya Taylor-Joy &nbsp;·&nbsp; Portrait Archive</footer>
+
+    <script src="upload.js"></script>
+  </body>
+</html>
