@@ -903,7 +903,7 @@
       async function loadImages() {
         try {
           loader.style.display = "block";
-          const response = await fetch("http://localhost:5000/images");
+          const response = await fetch("https://anya-07qm.onrender.com/images");
           images = await response.json();
           loader.style.display = "none";
           buildGallery(); // call your existing logic
